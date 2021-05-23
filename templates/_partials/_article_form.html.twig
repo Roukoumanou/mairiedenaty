@@ -1,0 +1,14 @@
+{% for flashError in app.flashes('verify_email_error') %}
+    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+{% endfor %}
+
+{{ form_start(form) }}
+    {{ form_widget(form.title) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.Content) }}
+    {{ form_widget(form.cover) }}
+    {{ form_row(form.publishedAt)}}
+    {{ form_row(form.status )}}
+
+    <button type="submit" class="btn btn-outline-warning mt-5">Enrégistrer</button>
+{{ form_end(form) }}

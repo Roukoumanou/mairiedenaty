@@ -1,0 +1,25 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier Cet Utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Modifier Cet Utilisateur</h1>
+
+    <div class="row m-5 mb-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        {{ form_start(form) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.country) }}
+
+            <button type="submit" class="btn btn-outline-warning mt-5">Enrégistrer</button>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

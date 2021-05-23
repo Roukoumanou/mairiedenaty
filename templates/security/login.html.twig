@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block titre "Connexion" %}
+
+{% block body %}
+<div class="row m-5 mb-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-9 border-start border-success border-4">
+        <!-- Default form login -->
+        <form class="text-center" action={{ path('app_login') }} method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+            <!-- Email -->
+            <div class="input-group mb-3">
+                <input type="email" name="email" id="username" value="{{ last_username }}" class="form-control" placeholder="Votre email" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <!-- Password -->
+            <input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe">
+            <input type="hidden" name="_csrf_token" value={{ csrf_token('authenticate') }}>
+
+            <div class="row">
+                <!-- Remember me -->
+                <div class="col-md-6 d-flex justify-content-center form-check form-switch">
+                    <input type="checkbox" class="form-check-input" id="flexSwitchCheckChecked" name="_remember_me">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Mémoriser?</label>
+                </div>
+                <div class=" col-md-6">
+                    <a href={{ path('app_forgot_password_request') }} class="float-right">Mot de passe oublier</a>
+                </div>
+            </div>
+
+            <!-- Sign in button -->
+            <button class="btn btn-info btn-block my-4" type="submit">je Me Connect</button>
+            <p>Vous n'avez pas de compte? <a class="text-success" href={{ path('app_register') }}>Inscrivez-Vous!</a></p>
+        </form>
+
+    <!-- Default form login -->
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}
+                        

@@ -1,0 +1,35 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des inscrits{% endblock %}
+
+{% block body %}
+<h1>Liste des inscrits</h1>
+
+<a class="btn btn-outline-warning" href="{{ path('admin_user_add') }}">Ajouter</a>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Identifiant</th>
+      <th scope="col">Nom Prénom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Pays De Résidence</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+        <tr class="table-active">
+            <td>{{ user.id }}</td>
+            <td>{{ user.fullName|title }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.country|title }}</td>
+            <td>
+                <a class="btn btn-outline-primary" href="{{ path('admin_show_user', {id: user.id }) }}">Voir</a>
+                <a class="btn btn-outline-warning" href="{{ path('admin_user_edit', {id: user.id}) }}">Modifier</a>
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

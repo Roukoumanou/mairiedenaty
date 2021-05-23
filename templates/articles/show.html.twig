@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ new.title }}{% endblock %}
+
+{% block titre %}
+    {{ new.title|title }}
+{% endblock %}
+
+{% block body %}
+    {% include "_partials/article_show.html.twig" %}
+{% endblock %}

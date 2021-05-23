@@ -1,0 +1,9 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ new.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ new.title|title }} ({{ new.status|title }})</h1>
+
+    {% include "_partials/article_show.html.twig" %}
+{% endblock %}

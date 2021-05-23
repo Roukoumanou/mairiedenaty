@@ -1,0 +1,31 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+<h1>Liste des Catégories</h1>
+
+<a class="btn btn-outline-warning" href="{{ path('admin_category_new') }}">Ajouter</a>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Identifiant</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category in categories %}
+        <tr class="table-active">
+            <td>{{ category.id }}</td>
+            <td>{{ category.name|title }}</td>
+            <td>
+                <a class="btn btn-outline-primary" href="{{ path('admin_category', {'name': category.name }) }}">Voir</a>
+                <a class="btn btn-outline-warning" href="{#{ path('home') }#}">Modifier</a>
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,42 @@
+<div class="container">
+        {% include "_partials/shart.html.twig" %}
+
+        {{ new.Content|raw }}
+
+        <hr>
+
+        {% if app.user %}
+            <div class="row m-3">
+                <div class="col-md-9">
+                    {% for flashError in app.flashes('verify_email_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                    {% endfor %}
+
+                    {{ form_start(form) }}
+                        {{ form_row(form.content) }}
+
+                            <button type="submit" class="btn btn-block my-4 btn-outline-primary mt-1">
+                                Envoyer
+                            </button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        {% else %}
+
+            <p><a href="{{ path('app_login') }}" class="btn btn-outline-primary">Connectez-vous pour donner votre avis </a></p>
+        {% endif %}
+
+        <h5 class="m2">Commentaires des concitoyents</h5>
+        <div class="row bg-light m-3">
+            <div class="col-md-9">
+                {% for comment in new.commentes %}
+                    <div class="border-start border-secondary border-4 p-2">
+                        <p class="text-info mb-2">{{ comment.author.fullName|title }} a dit <span class="text-muted">le {{ comment.createdAt|date('d-m-Y') }}</span></p>
+                        {{ comment.content|nl2br }}
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,39 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des articles!{% endblock %}
+
+{% block body %}
+<h1>Liste des Articles</h1>
+
+<a class="btn btn-outline-warning" href="{{ path('admin_article_new') }}">Ajouter</a>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Identifiant</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Catégory</th>
+      <th scope="col">Status</th>
+      <th scope="col">Date de Publication</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for article in articles %}
+        <tr class="table-active">
+            <td>{{ article.id }}</td>
+            <td>{{ article.title|title }}</td>
+            <td>{{ article.category.name|title }}</td>
+            <td>{{ article.status|title }}</td>
+            <td>{{ article.publishedAt ? article.publishedAt|date('d-m-Y') : '' }}</td>
+            <td>
+                <a class="btn btn-outline-primary" href="{{ path('admin_article_show', {'id': article.id}) }}">Voir</a>
+                <a class="btn btn-outline-warning" href="{{ path('admin_article_edit', {'id': article.id}) }}">Modifier</a>
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
