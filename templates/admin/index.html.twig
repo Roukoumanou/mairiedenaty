@@ -3,5 +3,33 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
-
+<h1>Tableau De Récape !</h1>
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="col-4">
+        <h5>Nombre d'Inscrits</h5>
+            <h1>{{ users }}</h1>
+        </div>
+        <div class="col-4">
+        <h5>Nombre d'Articles</h5>
+            <h1>{{ articles }}</h1>
+        </div>
+        <div class="col-4">
+        <h5>Nombre de Likes D'articles</h5>
+            <h1>{{ articlesLikes }}</h1>
+        </div> 
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-4">
+        <h5>Nombre de Catégories</h5>
+            <h1>{{ categories }}</h1>
+        </div>
+        <div class="col-4">
+        <h5>Nombre de Commentaires</h5>
+            <h1>{{ commentes }}</h1>
+        </div>
+        <div class="col-4">
+        <h5>Nombre de Likes de Commentaires</h5>
+            <h1>{{ commentesLikes }}</h1>
+        </div> 
+    </div>
 {% endblock %}

@@ -43,7 +43,6 @@ class ArticlesRepository extends ServiceEntityRepository
             ->andWhere('c.name = :val')
             ->setParameter('val', $name)
             ->orderBy('a.id', 'DESC')
-            ->setMaxResults(6)
             ->getQuery()
             ->getResult();
     }

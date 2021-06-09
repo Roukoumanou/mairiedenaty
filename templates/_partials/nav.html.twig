@@ -20,7 +20,7 @@
           <a class="nav-link" href="{{ path('infos') }}">News</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Mot Du Maire</a>
+          <a class="nav-link" href="{{ path('mot_du_maire') }}">Mot Du Maire</a>
         </li>
       </ul>
         {% if app.user %}
@@ -38,7 +38,9 @@
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    
+                    <a class="dropdown-item" href="{{ path('profil') }}">
+                    Votre Tableau de Bord
+                    </a>
                     <a class="dropdown-item" href="{{ path('account_update') }}">
                     Modifier Votre Compte
                     </a>

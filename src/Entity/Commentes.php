@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentesRepository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentesRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -29,8 +32,8 @@ class Commentes
      * @Assert\Length(
      *      min=8,
      *      max=255,
-     *      minMessage="Le titre doit faire minimum {{ limit }} caractères",
-     *      maxMessage="Le titre ne doit pas dépasser {{ limit }} caractères")
+     *      minMessage="Le commentaire doit faire minimum {{ limit }} caractères",
+     *      maxMessage="Le commentaire ne doit pas dépasser {{ limit }} caractères")
      */
     private $content;
 
@@ -49,9 +52,21 @@ class Commentes
      */
     private $article;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommenteReponse::class, mappedBy="commente")
+     */
+    private $commenteReponses;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommentesLikes::class, mappedBy="commente")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->commenteReponses = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,5 +132,78 @@ class Commentes
         $this->article = $article;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|CommenteReponse[]
+     */
+    public function getCommenteReponses(): Collection
+    {
+        return $this->commenteReponses;
+    }
+
+    public function addCommenteReponse(CommenteReponse $commenteReponse): self
+    {
+        if (!$this->commenteReponses->contains($commenteReponse)) {
+            $this->commenteReponses[] = $commenteReponse;
+            $commenteReponse->setCommente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommenteReponse(CommenteReponse $commenteReponse): self
+    {
+        if ($this->commenteReponses->removeElement($commenteReponse)) {
+            // set the owning side to null (unless already changed)
+            if ($commenteReponse->getCommente() === $this) {
+                $commenteReponse->setCommente(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentesLikes[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(CommentesLikes $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setCommente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(CommentesLikes $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getCommente() === $this) {
+                $like->setCommente(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     * @return boolean
+     */
+    public function getIsLikeByUser(User $user): bool
+    {
+        foreach ($this->likes as  $like) {
+            if ($like->getAuthor() === $user) return true;
+        }
+
+        return false;
     }
 }

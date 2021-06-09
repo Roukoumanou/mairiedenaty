@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}profil!{% endblock %}
+
+{% block titre %}
+    {{ user.fullName|title }}
+{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center m-5 mb-5 text-uppercase m-0">
+        <a href="{{ path('articles_likes')}}" class="col-md-3 m-1 mt-2 text-center py-4 h-100">
+            <div class="card py-4 h-100">
+                <div class="card-body">
+                Les Articles Que Vous Aimez
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ path('my_commentes')}}" class="col-md-3 m-1 mt-2 text-center py-4 h-100">
+            <div class="card py-4 h-100">
+                <div class="card-body">
+                Vos Avis Publique Personnel
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ path('my_commentes_likes')}}" class="col-md-3 m-1 mt-2 text-center py-4 h-100">
+            <div class="card py-4 h-100">
+                <div class="card-body">
+                Les Avis Publique Que Vous Aimez
+                </div>
+            </div>
+        </a>
+    </div>
+{% endblock %}

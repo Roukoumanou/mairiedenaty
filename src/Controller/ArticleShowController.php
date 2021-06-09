@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use SocialLinks\Page;
 use App\Entity\Articles;
+use App\Entity\CommenteReponse;
 use App\Entity\Commentes;
 use App\Form\CommentesType;
+use App\Form\ResponseType;
 use App\Repository\CommentesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +26,10 @@ final class ArticleShowController extends AbstractController
         $commente = new Commentes();
         $form = $this->createForm(CommentesType::class, $commente);
         $form->handleRequest($request);
+
+        $commenteResponse = new CommenteReponse();
+        $responseForm = $this->createForm(ResponseType::class, $commenteResponse);
+        $responseForm->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $commente->setAuthor($this->getUser())
@@ -46,6 +52,7 @@ final class ArticleShowController extends AbstractController
         return $this->render('articles/show.html.twig', [
             'new' => $article,
             'form' =>  $form->createView(),
+            'commenteForm' => $responseForm->createView()
         ]);
     }
 }

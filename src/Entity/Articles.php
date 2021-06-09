@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticlesRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -90,10 +91,16 @@ class Articles
      */
     private $commentes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ArticlesLikes::class, mappedBy="article")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->commentes = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -263,5 +270,48 @@ class Articles
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|ArticlesLikes[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(ArticlesLikes $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(ArticlesLikes $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getArticle() === $this) {
+                $like->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     * @return boolean
+     */
+    public function getIsLikeByUser(User $user): bool
+    {
+        foreach ($this->likes as  $like) {
+            if ($like->getAuthor() === $user) return true;
+        }
+
+        return false;
     }
 }

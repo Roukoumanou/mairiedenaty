@@ -17,7 +17,7 @@ final class ConseilsCommunauxController extends AbstractController
     public function conseilsCommunaux(ArticlesRepository $articlesRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $news = $paginator->paginate(
-            $articlesRepository->findByCategory('Conseils Communaux'), /* query NOT result */
+            $articlesRepository->findByCategory('conseils'), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );

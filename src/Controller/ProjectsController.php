@@ -17,7 +17,7 @@ final class ProjectsController extends AbstractController
     public function projects(ArticlesRepository $articlesRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $news = $paginator->paginate(
-            $articlesRepository->findByCategory('Les Projets'), /* query NOT result */
+            $articlesRepository->findByCategory('projets'), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );

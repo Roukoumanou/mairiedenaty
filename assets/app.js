@@ -27,7 +27,7 @@ import './bootstrap';
         popup.focus();
         return true;
     };
-
+ 
     document.querySelector('.share_twitter').addEventListener('click', function(e) {
         e.preventDefault();
         var url = this.getAttribute('data-url');

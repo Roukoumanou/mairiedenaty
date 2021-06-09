@@ -1,7 +1,17 @@
-<div class="container">
+    <div class="container">
         {% include "_partials/shart.html.twig" %}
 
         {{ new.Content|raw }}
+
+        <a href="{{ path('article_like', {id: new.id }) }}" class="btn btn-link js-like">
+            {% if app.user and new.getIsLikeByUser(app.user) == true %}
+                <i class="fas fa-thumbs-up"></i>
+            {% else %}
+                <i class="far fa-thumbs-up"></i>
+            {% endif %}
+            <span class="js-likes">{{ new.likes|length }}</span>
+            <span class="js-label">J'aime</span>
+        </a>
 
         <hr>
 
@@ -33,9 +43,18 @@
                 {% for comment in new.commentes %}
                     <div class="border-start border-secondary border-4 p-2">
                         <p class="text-info mb-2">{{ comment.author.fullName|title }} a dit <span class="text-muted">le {{ comment.createdAt|date('d-m-Y') }}</span></p>
-                        {{ comment.content|nl2br }}
+                        {{ comment.content|nl2br }}<br />
+                        <a href="{{ path('commente_like', {id: comment.id }) }}" class="btn btn-link js-like">
+                            {% if app.user and comment.getIsLikeByUser(app.user) == true %}
+                                <i class="fas fa-thumbs-up"></i>
+                            {% else %}
+                                <i class="far fa-thumbs-up"></i>
+                            {% endif %}
+                            <span class="js-likes">{{ comment.likes|length }}</span>
+                            <span class="js-label">J'aime{% if comment.likes|length > 1 %} s {% endif %}</span>
+                        </a>
                     </div>
-                    <hr>
+                    <hr />
                 {% endfor %}
             </div>
         </div>

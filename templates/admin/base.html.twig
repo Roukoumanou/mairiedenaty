@@ -8,8 +8,8 @@
         <title>Admin-{% block title %}Welcome!{% endblock %}</title>
 
         <!-- Favicons -->
-        <link href="img/favicon.png" rel="icon">
-        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="../img/favicon.png" rel="icon">
+        <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
         
 
         <link rel="stylesheet" href="https://bootswatch.com/5/lumen/bootstrap.min.css" crossorigin="anonymous">
@@ -39,6 +39,42 @@
           <a class="nav-link" href="{{ path('admin_categories_list') }}">Les Catégories</a>
         </li>
       </ul>
+        {% if app.user %}
+        {% set user = app.user %}
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav float rigth">
+
+                <div class="topbar-divider d-none d-sm-block"></div>
+
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.fullName }}</span>
+                    <img class="img-profile rounded-circle" src="https://source.unsplash.com/random/60x60">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    
+                    <a class="dropdown-item" href="{{ path('account_update') }}">
+                    Modifier Votre Compte
+                    </a>
+                    <a class="dropdown-item" href="{{ path('password_edit') }}">
+                    Modifier Votre Mot De Passe
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('admin_logout') }}">
+                    Deconnexion
+                    </a>
+                </div>
+                </li>
+
+            </ul>
+        {% else %}
+        <ul class="navbar-nav float rigth">
+            <li class="nav-item"><a class="nav-link active" href="{{ path('app_login') }}">Connexion</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{{ path('app_register') }}">Inscription</a></li>
+        </ul>
+        {% endif %}
     </div>
   </div>
 </nav>

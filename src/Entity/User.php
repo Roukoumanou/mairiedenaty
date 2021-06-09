@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
@@ -95,9 +97,27 @@ class User implements UserInterface
      */
     private $country;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommenteReponse::class, mappedBy="author")
+     */
+    private $opinions;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommentesLikes::class, mappedBy="author")
+     */
+    private $likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ArticlesLikes::class, mappedBy="author")
+     */
+    private $articlesLikes;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->opinions = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->articlesLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,6 +312,96 @@ class User implements UserInterface
     public function setCountry(?string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommenteReponse[]
+     */
+    public function getOpinions(): Collection
+    {
+        return $this->opinions;
+    }
+
+    public function addOpinion(CommenteReponse $opinion): self
+    {
+        if (!$this->opinions->contains($opinion)) {
+            $this->opinions[] = $opinion;
+            $opinion->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpinion(CommenteReponse $opinion): self
+    {
+        if ($this->opinions->removeElement($opinion)) {
+            // set the owning side to null (unless already changed)
+            if ($opinion->getAuthor() === $this) {
+                $opinion->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentesLikes[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(CommentesLikes $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(CommentesLikes $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getAuthor() === $this) {
+                $like->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArticlesLikes[]
+     */
+    public function getArticlesLikes(): Collection
+    {
+        return $this->articlesLikes;
+    }
+
+    public function addArticlesLike(ArticlesLikes $articlesLike): self
+    {
+        if (!$this->articlesLikes->contains($articlesLike)) {
+            $this->articlesLikes[] = $articlesLike;
+            $articlesLike->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticlesLike(ArticlesLikes $articlesLike): self
+    {
+        if ($this->articlesLikes->removeElement($articlesLike)) {
+            // set the owning side to null (unless already changed)
+            if ($articlesLike->getAuthor() === $this) {
+                $articlesLike->setAuthor(null);
+            }
+        }
 
         return $this;
     }
