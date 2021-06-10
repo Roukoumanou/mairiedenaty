@@ -8,7 +8,7 @@
 <div class="row m-5 mb-5">
     <div class="col-md-3"></div>
     <div class="col-md-9 border-start border-success border-4">
-    <form class="text-center" method="post">
+    <form method="post">
         {% for flashError in app.flashes('verify_email_error') %}
             <div class="alert alert-danger" role="alert">{{ flashError }}</div>
         {% endfor %}
@@ -16,7 +16,7 @@
         {{ form_start(registrationForm) }}
             {{ form_widget(registrationForm.firstName) }}
             {{ form_widget(registrationForm.lastName) }}
-            {{ form_widget(registrationForm.country) }}
+            {{ form_row(registrationForm.country) }}
             {{ form_widget(registrationForm.email) }}
             {{ form_widget(registrationForm.password) }}
             {{ form_widget(registrationForm.confirmPass) }}

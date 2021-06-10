@@ -1,7 +1,7 @@
     <div class="row mt-4">
         {% for new in news %}
             <a class="col-md-4 mb-2" href="{{ path('article_show', {id: new.id, 'slug': new.slug}) }}">
-                <div class="card h-100 img-fluid card border-left-primary shadow h-100 py-2">
+                <div class="card h-100 img-fluid card border-left-primary shadow h-100">
                         <img class="card-img-top" style="height : 26rem; width: 100%;" 
                         src="{{ new.cover }}" alt="{{ new.title|title }}">
                     <div class="card-body">

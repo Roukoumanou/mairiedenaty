@@ -42,7 +42,7 @@ class ArticlesRepository extends ServiceEntityRepository
         return $this->getQuery()
             ->andWhere('c.name = :val')
             ->setParameter('val', $name)
-            ->orderBy('a.id', 'DESC')
+            ->orderBy('a.publishedAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
