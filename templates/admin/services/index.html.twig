@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste Des Services{% endblock %}
+
+{% block body %}
+<h1>Liste Des Services</h1>
+<a class="btn btn-outline-warning" href="{{ path('admin_new_service') }}">Ajouter</a>
+
+<div class="row m-5 mb-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                <th scope="col">Identifiant</th>
+                <th scope="col">Service</th>
+                <th scope="col">Prestations</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date de Modification</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                    <tr class="table-active">
+                        <td>{{ service.id }}</td>
+                        <td>{{ service.name|title }}</td>
+                        <td>{{ service.prestations|length }}</td>
+                        <td>{{ service.status|title }}</td>
+                        <td>{{ service.updatedAt ? service.updatedAt|date('d-m-Y') : '' }}</td>
+                        <td>
+                            <a class="btn btn-outline-warning" href="{{ path('admin_service_edit', {'id': service.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

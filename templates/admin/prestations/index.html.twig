@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste Des Prestations{% endblock %}
+
+{% block body %}
+<h1>Liste Des Prestations</h1>
+<a class="btn btn-outline-warning" href="{{ path('admin_prestation_new') }}">Ajouter</a>
+
+<div class="row m-5 mb-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                <th scope="col">Identifiant</th>
+                <th scope="col">Type</th>
+                <th scope="col">Cout</th>
+                <th scope="col">Service</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prestation in prestations %}
+                    <tr class="table-active">
+                        <td>{{ prestation.id }}</td>
+                        <td>{{ prestation.name|title }}</td>
+                        <td>{{ prestation.cout }}</td>
+                        <td>{{ prestation.service.name|title }}</td>
+                        <td>
+                            {% if prestation.status == true %}
+                                {{"public"}}
+                            {% else %}
+                                {{"Non public"}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-warning" href="{{ path('admin_prestation_update', {'id': prestation.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -7,6 +7,8 @@ use App\Repository\ArticlesRepository;
 use App\Repository\CategoriesRepository;
 use App\Repository\CommentesLikesRepository;
 use App\Repository\CommentesRepository;
+use App\Repository\PrestationsRepository;
+use App\Repository\ServicesRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +27,9 @@ final class AdminHomeController extends AbstractController
         UserRepository $userRepository,
         CategoriesRepository $categoriesRepository,
         CommentesRepository $commentesRepository,
-        CommentesLikesRepository $commentesLikesRepository
+        CommentesLikesRepository $commentesLikesRepository,
+        PrestationsRepository $prestationsRepository,
+        ServicesRepository $servicesRepository
     ): Response {
         return $this->render('admin/index.html.twig', [
             'articles' => $articlesRepository->count([]),
@@ -33,7 +37,9 @@ final class AdminHomeController extends AbstractController
             'users' => $userRepository->count([]),
             'categories' => $categoriesRepository->count([]),
             'commentes' => $commentesRepository->count([]),
-            'commentesLikes' => $commentesLikesRepository->count([])
+            'commentesLikes' => $commentesLikesRepository->count([]),
+            'prestations' => $prestationsRepository->count([]),
+            'services' => $servicesRepository->count([])
         ]);
     }
 }

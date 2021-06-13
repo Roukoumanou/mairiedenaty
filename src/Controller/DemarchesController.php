@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Prestations;
 use App\Repository\ArticlesRepository;
+use App\Repository\PrestationsRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,16 +16,31 @@ final class DemarchesController extends AbstractController
     /**
      * @Route("/demarches", name="demarches", methods={"GET"})
      */
-    public function mesDemarches(ArticlesRepository $articlesRepository, PaginatorInterface $paginator, Request $request): Response
+    public function mesDemarches(PrestationsRepository $prestationsRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $news = $paginator->paginate(
-            $articlesRepository->findByCategory('demarches'), /* query NOT result */
+        $prestations = $paginator->paginate(
+            $prestationsRepository->findBy([
+                'status' => true
+            ]), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );
 
         return $this->render('articles/demarches/demarches.html.twig', [
-            'news' => $news,
+            'prestations' => $prestations,
+        ]);
+    }
+
+    /**
+     * @Route("/demarche/{id}", name="presta_show", methods={"GET"})
+     * 
+     * @param Prestations $prestation
+     * @return Response
+     */
+    public function show(Prestations $prestation): Response
+    {
+        return $this->render('articles/demarches/show.html.twig', [
+            'prestation' => $prestation,
         ]);
     }
 }

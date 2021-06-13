@@ -20,19 +20,19 @@
     </head>
     <body>
     <header>
-    <div id="h">
-        <div class="container">
-            {% include "_partials/nav.html.twig" %}
-        <div class="row bg-ligth">
-            <h2>{% block titre %}{% endblock %}</h2>
-            <h5>Union, Justice, Prospérité</h5>
+        <div id="h">
+            <div class="container">
+                {% include "_partials/nav.html.twig" %}
+            <div class="row bg-ligth">
+                <h2>{% block titre %}{% endblock %}</h2>
+                <h5>Union, Justice, Prospérité</h5>
+            </div>
+            <!--/row-->
+            </div>
+            <!--/container-->
         </div>
-        <!--/row-->
-        </div>
-        <!--/container-->
-    </div>
-    <!--/H-->
-</header>
+        <!--/H-->
+    </header>
         <div class="container">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}

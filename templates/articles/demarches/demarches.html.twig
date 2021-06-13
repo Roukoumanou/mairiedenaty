@@ -5,5 +5,18 @@
 {% block titre "Mes Démarches" %}
 
 {% block body %}
-    {% include "_partials/news.html.twig" %}
+    <div class="row mt-4">
+        {% for prestation in prestations %}
+            <a class="col-md-4 mb-2" href="{{ path('presta_show', {"id": prestation.id}) }}">
+                <div class="card h-100 img-fluid card border-left-primary shadow h-100">
+                        <img class="card-img-top" style="height : 26rem; width: 100%;" 
+                        src="{{ vich_uploader_asset(prestation, 'imageFile') }}" alt="{{ prestation.name|title }}">
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(prestations) }}
+    </div>
 {% endblock %}
