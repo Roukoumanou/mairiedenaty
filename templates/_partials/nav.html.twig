@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-  <a class="navbar-brand" href="{{ path('home') }}">Acceuil</a>
+      <form class="d-flex">
+          <input class="form-control me-sm-2" id="search" type="text" placeholder="Faire une recherche"/>
+      </form>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,9 +25,6 @@
           <a class="nav-link" href="{{ path('mot_du_maire') }}">Mot Du Maire</a>
         </li>
       </ul>
-      <form class="d-flex">
-          <input class="form-control me-sm-2" id="search" type="text" placeholder="Faire une recherche"/>
-      </form>
         {% if app.user %}
         {% set user = app.user %}
             <!-- Topbar Navbar -->
