@@ -23,6 +23,9 @@
           <a class="nav-link" href="{{ path('mot_du_maire') }}">Mot Du Maire</a>
         </li>
       </ul>
+      <form class="d-flex">
+          <input class="form-control me-sm-2" id="search" type="text" placeholder="Faire une recherche"/>
+      </form>
         {% if app.user %}
         {% set user = app.user %}
             <!-- Topbar Navbar -->

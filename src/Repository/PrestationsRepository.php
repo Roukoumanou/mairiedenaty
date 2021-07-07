@@ -19,6 +19,19 @@ class PrestationsRepository extends ServiceEntityRepository
         parent::__construct($registry, Prestations::class);
     }
 
+
+    public function findByName($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.id, p.name')
+            ->andWhere('p.name LIKE :val')
+            ->setParameter('val', "%$value%")
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Prestations[] Returns an array of Prestations objects
     //  */
