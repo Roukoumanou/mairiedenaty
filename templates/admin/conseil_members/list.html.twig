@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des Membres du conseil communal{% endblock %}
+
+{% block body %}
+    <h1>Liste des Membres du conseil communal</h1>
+
+<div class="row m-5 mb-5">
+    <div class="col-md-3"><a class="btn btn-outline-warning" href="{{ path('conseil_member_new') }}">Ajouter</a></div>
+    <div class="col-md-9">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                <th scope="col">Identifiant</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Nom -Prénom</th>
+                <th scope="col">Mandat</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                    <tr class="table-active">
+                        <td>{{ member.id }}</td>
+                        <td>{{ member.fullName|title }}</td>
+                        <td>{{ member.title|title }}</td>
+                        <td>{{ member.mandature }}</td>
+                        <td>
+                            <a class="btn btn-outline-primary" href="{{ path('conseil_member', {'id': member.id, 'slug': member.slug}) }}">Voir</a>
+                            <a class="btn btn-outline-warning" href="{{ path('conseil_member_edit', {'id': member.id, 'slug': member.slug}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

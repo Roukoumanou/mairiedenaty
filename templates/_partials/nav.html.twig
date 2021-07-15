@@ -13,19 +13,22 @@
           <a class="nav-link" href="{{ path('home') }}">Accueil</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{ path('conseils_communaux') }}">Conseils Communaux</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ path('demarches') }}">Mes Démarches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('mot_du_maire') }}">Mot Du Maire</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('mandature') }}">Mandature</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ path('projects') }}">Les Projets</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('conseils_communaux') }}">Conseils Communaux</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="{{ path('infos') }}">News</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('mot_du_maire') }}">Mot Du Maire</a>
         </li>
       </ul>
         {% if app.user %}

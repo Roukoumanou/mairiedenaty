@@ -46,16 +46,19 @@ class Articles
 
     /**
      * @ORM\Column(type="datetime")
+     * @var \DateTime
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @var \DateTime
      */
     private $updatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
      */
     private $publishedAt;
 
