@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\UserPassportInterface;
 
 final class AdminUserAddController extends AbstractController
@@ -16,7 +17,7 @@ final class AdminUserAddController extends AbstractController
     /**
      * @Route("/admin/user/add", name="admin_user_add", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
 
@@ -25,7 +26,13 @@ final class AdminUserAddController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setRoles(['ROLE_REDACT']);
+            $user->setRoles(["ROLE_REDACTOR"])
+                ->setIsVerified(true)
+                ->setPassword($encoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                ));
+
             $em->persist($user);
             $em->flush();
 

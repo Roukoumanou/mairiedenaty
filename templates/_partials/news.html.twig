@@ -5,10 +5,10 @@
                         <img class="card-img-top" style="height : 26rem; width: 100%;" 
                         src="{{ new.cover }}" alt="{{ new.title|title }}">
                     <div class="card-body">
-                        <h5><strong>{{ new.title|title }}</strong></h5>
+                        <div class="text-center"><strong>{{ new.title|title }}</strong></div>
                     </div>
                     <div class="card-footer">
-                        <small class="float-left">Le {{ new.publishedAt ? new.publishedAt|date("d m Y") : ""}}</small>
+                        <small class="text-muted">Le {{ new.publishedAt ? new.publishedAt|date("d m Y") : ""}}</small>
                     </div>
                 </div>
             </a>

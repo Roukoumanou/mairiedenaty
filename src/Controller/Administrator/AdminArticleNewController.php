@@ -47,6 +47,7 @@ final class AdminArticleNewController extends AbstractController
 
             return $this->redirectToRoute('admin_home');
         }
+
         return $this->render('admin/articles/new.html.twig', [
             'form' => $form->createView(),
         ]);

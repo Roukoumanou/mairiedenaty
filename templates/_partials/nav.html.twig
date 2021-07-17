@@ -41,7 +41,7 @@
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.fullName }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ "Paramètre" }}</span>
                     <img class="img-profile rounded-circle" src="https://source.unsplash.com/random/60x60">
                 </a>
                 <!-- Dropdown - User Information -->
@@ -49,6 +49,11 @@
                     <a class="dropdown-item" href="{{ path('profil') }}">
                     Votre Tableau de Bord
                     </a>
+                    {% if is_granted("ROLE_REDACTOR") %}
+                      <a class="dropdown-item" href="{{ path('redact_new_article') }}">
+                      Ajouter un article
+                      </a>
+                    {% endif %}
                     <a class="dropdown-item" href="{{ path('account_update') }}">
                     Modifier Votre Compte
                     </a>

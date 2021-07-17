@@ -22,6 +22,8 @@ final class AdminUserEditController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUpdatedAt(new \DateTime());
+
             $em->flush();
             $this->addFlash(
                 'success',
