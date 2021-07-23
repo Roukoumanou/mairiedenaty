@@ -8,9 +8,10 @@
     <div class="row mt-4">
         {% for prestation in prestations %}
             <a class="col-md-4 mb-2" href="{{ path('presta_show', {"id": prestation.id}) }}">
-                <div class="card h-100 img-fluid card border-left-primary shadow h-100">
-                        <img class="card-img-top" style="height : 26rem; width: 100%;" 
-                        src="{{ vich_uploader_asset(prestation, 'imageFile') }}" alt="{{ prestation.name|title }}">
+                <div class="card border-success" style="max-width: 20rem;">
+                    <div class="card-body">
+                        <p class="card-title h5">{{ prestation.name|title }}</p>
+                    </div>
                 </div>
             </a>
         {% endfor %}
