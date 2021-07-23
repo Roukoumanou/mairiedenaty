@@ -23,7 +23,7 @@ final class DemarchesController extends AbstractController
                 'status' => true
             ]), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            6 /*limit per page*/
+            12 /*limit per page*/
         );
 
         return $this->render('articles/demarches/demarches.html.twig', [
