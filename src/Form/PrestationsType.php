@@ -33,7 +33,8 @@ class PrestationsType extends AbstractType
                 'label' => 'Délai'
             ])
             ->add('imageFile', FileType::class, [
-                'label' => 'Cover'
+                'label' => 'Cover',
+                'required' => false
             ])
             ->add('pieces', CKEditorType::class)
             ->add('service', EntityType::class, [
