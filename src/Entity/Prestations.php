@@ -4,14 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PrestationsRepository;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PrestationsRepository::class)
- * @Vich\Uploadable
  * @UniqueEntity(
  *    fields  = {"name"},
  *    message = "Cet type de prestation est déja utilisé !")
@@ -81,30 +78,6 @@ class Prestations
      * @ORM\Column(type="boolean")
      */
     private $status;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $image;
-
-    /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @Vich\UploadableField(mapping="presta_image", fileNameProperty="image")
-     * @Assert\Image(
-     *     maxSize = "1000k",
-     *     mimeTypes = {"image/jpeg", "image/png", "image/JPG"},
-     *     allowLandscape = false,
-     *     allowPortrait = false,
-     *     mimeTypesMessage = "Nous n'acceptons que les images en png, jpg, jpeg",
-     *     maxSizeMessage = "Le fichier est trop volumineux ({{ size }} {{ suffix }}). La taille maximale autorisée est {{ limit }} {{ suffix }}",
-     *     allowPortraitMessage = "L'image doit être carré ex: 500*500",
-     *     allowLandscapeMessage = "L'image doit être carré ex: 500*500"
-     * )
-     * 
-     * @var File|null
-     */
-    private $imageFile;
 
     public function __construct()
     {
@@ -222,42 +195,5 @@ class Prestations
         $this->status = $status;
 
         return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
-     */
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
     }
 }

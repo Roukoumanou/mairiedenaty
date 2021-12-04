@@ -23,10 +23,10 @@ final class SearchController extends AbstractController
             foreach ($prestations as $prestation) {
                 $url = $this->generateUrl('presta_show', ['id' => $prestation['id']], UrlGeneratorInterface::ABSOLUTE_URL);
                 $result[] =
-                    "<a class='text-warning'
+                    "<p classe='container'><a class='text-warning'
                         href='$url'>
                     $prestation[name]
-                    </a> <hr/>";
+                    </a></p>";
             }
             return new JsonResponse($result);
         }

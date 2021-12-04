@@ -5,57 +5,70 @@
 {% block titre "Mandature 2020-2026" %}
 
 {% block body %}
-    {#Le maire#}
-    {% set maire = members.maire %}
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-4 mb-2">
-            <div class="card h-100 img-fluid card border-left-primary shadow h-100">
-                    <img class="card-img-top" style="height : 26rem; width: 100%;" 
-                    src="{{ vich_uploader_asset(maire, 'imageFile') }}" alt="{{ maire.title|title }}">
-                <div class="card-body">
-                    <p class="text-center">{{ maire.fullName|title }}</p>
-                    <p class="text-center"><strong>{{ maire.title|title }}</strong></p>
-                    <p class="text-center"><strong>{{ maire.mandature }}</strong></p>
+    {% if members.maire %}
+        {#Le maire#}
+        {% set maire = members.maire %}
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4 mb-2">
+                <div class="card h-100 img-fluid card border-left-primary shadow h-100">
+                        <img class="card-img-top" style="height : 26rem; width: 100%;" 
+                        src="{{ vich_uploader_asset(maire, 'imageFile') }}" alt="{{ maire.title|title }}">
+                    <div class="card-body">
+                        <p class="text-center">{{ maire.fullName|title }}</p>
+                        <p class="text-center"><strong>{{ maire.title|title }}</strong></p>
+                        <p class="text-center"><strong>{{ maire.mandature }}</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
+
     <hr>
-    {#Les Adjoints#}
+
     <div class="row d-flex justify-content-center">
-    {% for adjoint in members.adjoints %}
-        <div class="col-md-4 mb-2">
-            <div class="card h-100 img-fluid card border-left-primary shadow h-100">
-                    <img class="card-img-top" style="height : 26rem; width: 100%;" 
-                    src="{{ vich_uploader_asset(adjoint, 'imageFile') }}" alt="{{ adjoint.title|title }}">
-                <div class="card-body">
-                    <p class="text-center">{{ adjoint.fullName|title }}</p>
-                    <p class="text-center"><strong>{{ adjoint.title|title }}</strong></p>
+    {% if members.adjoints %}
+        {#Les Adjoints#}
+        {% for adjoint in members.adjoints %}
+            <div class="col-md-4 mb-2">
+                <div class="card h-100 img-fluid card border-left-primary shadow h-100">
+                        <img class="card-img-top" style="height : 26rem; width: 100%;" 
+                        src="{{ vich_uploader_asset(adjoint, 'imageFile') }}" alt="{{ adjoint.title|title }}">
+                    <div class="card-body">
+                        <p class="text-center">{{ adjoint.fullName|title }}</p>
+                        <p class="text-center"><strong>{{ adjoint.title|title }}</strong></p>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
     </div>
+
     <hr>
+
     {#Les C.As#}
     <div class="row d-flex justify-content-center">
-    {% for c_a in members.c_as %}
-        <div class="col-md-3 mb-2">
-            <div class="card h-100 img-fluid card border-left-primary shadow h-100">
-                    <img class="card-img-top" style="height : 26rem; width: 100%;" 
-                    src="{{ vich_uploader_asset(c_a, 'imageFile') }}" alt="{{ c_a.title|title }}">
-                <div class="card-body">
-                    <p class="text-center">{{ c_a.fullName|title }}</p>
-                    <p class="text-center"><strong>{{ c_a.title|title }}</strong></p>
+    {% if members.c_as %}
+        {% for c_a in members.c_as %}
+            <div class="col-md-3 mb-2">
+                <div class="card h-100 img-fluid card border-left-primary shadow h-100">
+                        <img class="card-img-top" style="height : 26rem; width: 100%;" 
+                        src="{{ vich_uploader_asset(c_a, 'imageFile') }}" alt="{{ c_a.title|title }}">
+                    <div class="card-body">
+                        <p class="text-center">{{ c_a.fullName|title }}</p>
+                        <p class="text-center"><strong>{{ c_a.title|title }}</strong></p>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
     </div>
+
     <hr>
+    
     <div class="row d-flex justify-content-center">
-    {#Le CAEF#}
-    {% set caef = members.caef %}
+        {% if members.caef %}
+        {#Le CAEF#}
+        {% set caef = members.caef %}
         <div class="col-md-3 mb-2">
             <div class="card h-100 img-fluid card border-left-primary shadow h-100">
                     <img class="card-img-top" style="height : 26rem; width: 100%;" 
@@ -66,8 +79,12 @@
                 </div>
             </div>
         </div>
-    {#Le Pdte CASC#}
-    {% set casc = members.casc %}
+        {% endif %}
+    </div>
+
+    {% if members.casc %}
+        {#Le Pdte CASC#}
+        {% set casc = members.casc %}
         <div class="col-md-3 mb-2">
             <div class="card h-100 img-fluid card border-left-primary shadow h-100">
                     <img class="card-img-top" style="height : 26rem; width: 100%;" 
@@ -78,6 +95,9 @@
                 </div>
             </div>
         </div>
+    {% endif %}
+
+    {% if members.plaintes %}
         {#Le Pdt Com.Plaintes#}
         {% set plaintes = members.plaintes %}
         <div class="col-md-3 mb-2">
@@ -90,6 +110,9 @@
                 </div>
             </div>
         </div>
+    {% endif %}
+
+    {% if members.cade %}
         {#Le Pdt CADE#}
         {% set cade = members.cade %}
         <div class="col-md-3 mb-2">
@@ -102,21 +125,26 @@
                 </div>
             </div>
         </div>
+    {% endif %}
     </div>
+
     <hr>
+
     {#Les Conseillers Communal#}
     <div class="row d-flex justify-content-center">
-    {% for c_c in members.c_cs %}
-        <div class="col-md-3 mb-2">
-            <div class="card h-100 img-fluid card border-left-primary shadow h-100">
-                    <img class="card-img-top" style="height : 26rem; width: 100%;" 
-                    src="{{ vich_uploader_asset(c_c, 'imageFile') }}" alt="{{ c_c.title|title }}">
-                <div class="card-body">
-                    <p class="text-center">{{ c_c.fullName|title }}</p>
-                    <p class="text-center"><strong>{{ c_c.title|title }}</strong></p>
+        {% if members.c_cs %}
+            {% for c_c in members.c_cs %}
+                <div class="col-md-3 mb-2">
+                    <div class="card h-100 img-fluid card border-left-primary shadow h-100">
+                            <img class="card-img-top" style="height : 26rem; width: 100%;" 
+                            src="{{ vich_uploader_asset(c_c, 'imageFile') }}" alt="{{ c_c.title|title }}">
+                        <div class="card-body">
+                            <p class="text-center">{{ c_c.fullName|title }}</p>
+                            <p class="text-center"><strong>{{ c_c.title|title }}</strong></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

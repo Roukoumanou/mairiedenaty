@@ -36,7 +36,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json_array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
 
@@ -154,6 +154,16 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 
     /**

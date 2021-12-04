@@ -18,5 +18,10 @@
     "dependencies": {
         "axios": "^0.21.1",
         "jquery": "^3.6.0"
-    }
+    },
+    "name": "mairiedenaty",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "git@github.com:Roukoumanou/mairiedenaty.git",
+    "author": "Roukoumanou <roukoumanouamidou@gmail.com>"
 }

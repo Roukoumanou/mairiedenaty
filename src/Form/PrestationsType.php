@@ -12,8 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PrestationsType extends AbstractType
 {
@@ -32,17 +30,13 @@ class PrestationsType extends AbstractType
             ->add('delai', TextType::class, [
                 'label' => 'Délai'
             ])
-            ->add('imageFile', FileType::class, [
-                'label' => 'Cover',
-                'required' => false
-            ])
             ->add('pieces', CKEditorType::class)
             ->add('service', EntityType::class, [
                 'expanded' => true,
                 'class' => Services::class,
                 'choice_label' => 'name'
             ])
-            ->add('description', CKEditorType::class)
+            ->add('description', TextType::class)
             ->add('status', CheckboxType::class, [
                 'label' => 'Disponible?',
                 'required' => false
