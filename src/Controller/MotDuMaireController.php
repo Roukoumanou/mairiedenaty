@@ -11,7 +11,7 @@ final class MotDuMaireController extends AbstractController
     /**
      * @Route("/mot-du-maire", name="mot_du_maire", methods={"GET"})
      */
-    public function index(): Response
+    public function Maire(): Response
     {
         return $this->render('mot_du_maire/index.html.twig', []);
     }

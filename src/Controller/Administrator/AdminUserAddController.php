@@ -9,16 +9,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authenticator\Passport\UserPassportInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class AdminUserAddController extends AbstractController
 {
     /**
      * @Route("/admin/user/add", name="admin_user_add", methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UserPasswordHasherInterface $encoder
+     * @return Response
      */
-    public function new(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder): Response
-    {
+    public function new(
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $encoder
+    ): Response{
         $user = new User();
 
         $form = $this->createForm(AdminRegisterType::class, $user);
@@ -28,7 +35,7 @@ final class AdminUserAddController extends AbstractController
 
             $user->setRoles(["ROLE_REDACTOR"])
                 ->setIsVerified(true)
-                ->setPassword($encoder->encodePassword(
+                ->setPassword($encoder->hashPassword(
                     $user,
                     $form->get('password')->getData()
                 ));

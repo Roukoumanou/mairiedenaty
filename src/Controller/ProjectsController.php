@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Articles;
 use App\Repository\ArticlesRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +14,19 @@ final class ProjectsController extends AbstractController
 {
     /**
      * @Route("/projets", name="projects", methods={"GET"})
+     *
+     * @param ArticlesRepository $articlesRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
      */
-    public function projects(ArticlesRepository $articlesRepository, PaginatorInterface $paginator, Request $request): Response
-    {
+    public function projects(
+        ArticlesRepository $articlesRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response{
         $news = $paginator->paginate(
-            $articlesRepository->findByCategory('projets'), /* query NOT result */
+            $articlesRepository->findByCategory(Articles::CATEGORIE_PROJET), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );

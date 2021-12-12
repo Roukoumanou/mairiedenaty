@@ -23,19 +23,19 @@ class CommunalConseilMembersType extends AbstractType
             ])
             ->add('fullName', TextType::class, [
                 'attr' => [
-                    'placeholder' => 'Nom et Prénom'
+                    'placeholder' => 'Nom et Prénom' 
                 ]
             ])
             ->add('poste', ChoiceType::class, [
                 'choices' => [
-                    'Maire' => 'maire',
-                    'Adjoints Au Maire' => 'adjoints_au_maire',
-                    'C.As' => 'c.as',
-                    'Pdt CAEF' => 'caef',
-                    'Pdte CASC' => 'casc',
-                    'Pdt Com.Plaintes' => 'plaintes',
-                    'Pdt CADE' => 'cade',
-                    'Conseiller Communal' => 'c.cs'
+                    'Maire' => CommunalConseilMembers::MAIRE,
+                    'Adjoints Au Maire' => CommunalConseilMembers::ADJOINTS_AU_MAIRE,
+                    'C.A' => CommunalConseilMembers::C_A,
+                    'Pdt CAEF' => CommunalConseilMembers::PDT_CAEF,
+                    'Pdte CASC' => CommunalConseilMembers::PDTE_CASC,
+                    'Pdt Com.Plaintes' => CommunalConseilMembers::PDT_COM_PLAINTES,
+                    'Pdt CADE' => CommunalConseilMembers::PDT_CADE,
+                    'Conseiller Communal' => CommunalConseilMembers::CONSEILLERS_COMMUNAL
                 ]
             ])
             ->add('mandature', TextType::class, [

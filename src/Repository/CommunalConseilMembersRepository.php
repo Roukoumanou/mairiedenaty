@@ -20,13 +20,13 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return CommunalConseilMembers[] Returns an array of CommunalConseilMembers objects
+     * @return CommunalConseilMembers Returns an array of CommunalConseilMembers objects
      */
     public function getMaire()
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'maire')
+            ->setParameter('val', CommunalConseilMembers::MAIRE)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -38,7 +38,7 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'adjoints_au_maire')
+            ->setParameter('val', CommunalConseilMembers::ADJOINTS_AU_MAIRE)
             ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getResult();
@@ -51,7 +51,7 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'caef')
+            ->setParameter('val', CommunalConseilMembers::PDT_CAEF)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -63,7 +63,7 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'c.as')
+            ->setParameter('val', CommunalConseilMembers::C_A)
             ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getResult();
@@ -76,7 +76,7 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'casc')
+            ->setParameter('val', CommunalConseilMembers::PDTE_CASC)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -88,7 +88,7 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'plaintes')
+            ->setParameter('val', CommunalConseilMembers::PDT_COM_PLAINTES)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -100,7 +100,7 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'cade')
+            ->setParameter('val', CommunalConseilMembers::PDT_CADE)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -112,21 +112,9 @@ class CommunalConseilMembersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.poste = :val')
-            ->setParameter('val', 'c.cs')
+            ->setParameter('val', CommunalConseilMembers::CONSEILLERS_COMMUNAL)
             ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
-
-    /*
-    public function findOneBySomeField($value): ?CommunalConseilMembers
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

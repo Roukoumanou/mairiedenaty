@@ -10,7 +10,7 @@ import './styles/app.css';
 import './styles/ionicons.min.css'
 
 // start the Stimulus application
-import './bootstrap';
+//import './bootstrap';
 
 (function() {
 

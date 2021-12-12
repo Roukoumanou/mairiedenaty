@@ -15,9 +15,16 @@ final class DemarchesController extends AbstractController
 {
     /**
      * @Route("/demarches", name="demarches", methods={"GET"})
+     *
+     * @param PrestationsRepository $prestationsRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
      */
-    public function mesDemarches(PrestationsRepository $prestationsRepository, PaginatorInterface $paginator, Request $request): Response
-    {
+    public function mesDemarches(
+        PrestationsRepository $prestationsRepository,
+        PaginatorInterface $paginator, Request $request
+    ): Response{
         $prestations = $paginator->paginate(
             $prestationsRepository->findBy([
                 'status' => true
