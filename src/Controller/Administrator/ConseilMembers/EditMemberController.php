@@ -20,8 +20,11 @@ final class EditMemberController extends AbstractController
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function edit(CommunalConseilMembers $member, Request $request, EntityManagerInterface $em): Response
-    {
+    public function edit(
+        CommunalConseilMembers $member,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
         $form = $this->createForm(CommunalConseilMembersType::class, $member);
         $form->handleRequest($request);
 

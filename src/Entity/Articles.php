@@ -21,6 +21,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Articles
 {
+    public const ARTICLE_PUBLISHED = 10;
+    public const ARTICLE_ARCHIVED = 20;
+    public const ARTICLE_DRAFT = 30;
+
+    public const CATEGORIE_CONSEIL_COMMUNAL = 'conseils';
+    public const CATEGORIE_INFOS = 'infos';
+    public const CATEGORIE_PROJET = 'projets';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -63,10 +71,10 @@ class Articles
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-    private $status;
+    private $status = self::ARTICLE_DRAFT;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
@@ -185,12 +193,12 @@ class Articles
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?int
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(int $status): self
     {
         $this->status = $status;
 

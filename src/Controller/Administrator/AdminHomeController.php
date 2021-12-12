@@ -19,6 +19,14 @@ final class AdminHomeController extends AbstractController
     /**
      * @Route("/admin", name="admin_home", methods={"GET"})
      *
+     * @param ArticlesRepository $articlesRepository
+     * @param ArticlesLikesRepository $articlesLikesRepository
+     * @param UserRepository $userRepository
+     * @param CategoriesRepository $categoriesRepository
+     * @param CommentesRepository $commentesRepository
+     * @param CommentesLikesRepository $commentesLikesRepository
+     * @param PrestationsRepository $prestationsRepository
+     * @param ServicesRepository $servicesRepository
      * @return Response
      */
     public function index(

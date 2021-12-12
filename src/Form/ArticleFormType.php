@@ -35,9 +35,9 @@ class ArticleFormType extends AbstractType
                 'expanded' => true,
                 'label' => "Status",
                 'choices' => [
-                    'Publié' => 'public',
-                    'Archivé' => 'archived',
-                    'Brouillon' => 'brouillon'
+                    'Publié' => Articles::ARTICLE_PUBLISHED,
+                    'Archivé' => Articles::ARTICLE_ARCHIVED,
+                    'Brouillon' => Articles::ARTICLE_DRAFT
                 ]
             ])
             ->add('cover', TextType::class, [

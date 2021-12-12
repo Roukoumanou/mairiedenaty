@@ -14,9 +14,17 @@ final class ArticleLikeController extends AbstractController
 {
     /**
      * @Route("/article/{id}-like", name="article_like")
+     *
+     * @param Articles $article
+     * @param EntityManagerInterface $em
+     * @param ArticlesLikesRepository $articlesLikesRepository
+     * @return Response
      */
-    public function articleLike(Articles $article, EntityManagerInterface $em, ArticlesLikesRepository $articlesLikesRepository): Response
-    {
+    public function articleLike(
+        Articles $article,
+        EntityManagerInterface $em,
+        ArticlesLikesRepository $articlesLikesRepository
+    ): Response{
         $user = $this->getUser();
 
         if ($article->getIsLikeByUser($user)) {

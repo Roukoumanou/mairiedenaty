@@ -14,9 +14,17 @@ final class AdminServicesEditController extends AbstractController
 {
     /**
      * @Route("/admin/service/{id}/edit", name="admin_service_edit", methods={"GET", "POST"})
+     *
+     * @param Services $service
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
-    public function edit(Services $service, Request $request, EntityManagerInterface $em): Response
-    {
+    public function edit(
+        Services $service,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response{
         $form = $this->createForm(ServicesType::class, $service);
         $form->handleRequest($request);
 

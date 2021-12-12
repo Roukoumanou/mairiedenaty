@@ -13,8 +13,11 @@ final class SearchController extends AbstractController
 {
     /**
      * @Route("/search", name="search", methods={"GET"})
+     *
+     * @param PrestationsRepository $prestationsRepository
+     * @return void
      */
-    public function index(PrestationsRepository $prestationsRepository)
+    public function search(PrestationsRepository $prestationsRepository)
     {
         if (isset($_GET['search'])) {
             $search = (string) trim($_GET['search']);

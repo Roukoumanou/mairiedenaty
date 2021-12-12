@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categories;
 use App\Entity\User;
+use App\Entity\Categories;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
