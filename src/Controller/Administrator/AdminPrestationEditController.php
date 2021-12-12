@@ -14,9 +14,17 @@ final class AdminPrestationEditController extends AbstractController
 {
     /**
      * @Route("/admin/prestation/update/{id}", name="admin_prestation_update", methods={"GET", "POST"})
+     *
+     * @param Prestations $presta
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
-    public function update(Prestations $presta, Request $request, EntityManagerInterface $em): Response
-    {
+    public function update(
+        Prestations $presta,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response{
         $form = $this->createForm(PrestationsType::class, $presta);
         $form->handleRequest($request);
 

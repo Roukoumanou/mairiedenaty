@@ -12,13 +12,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class HomeController extends AbstractController
 {
     /**
-     * Acceuil
      * @Route("/", name="home", methods={"GET"})
      *
+     * @param ArticlesRepository $articlesRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function index(ArticlesRepository $articlesRepository, PaginatorInterface $paginator, Request $request): Response
-    {
+    public function index(
+        ArticlesRepository $articlesRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response{
         $news = $paginator->paginate(
             $articlesRepository->findForIndex(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/

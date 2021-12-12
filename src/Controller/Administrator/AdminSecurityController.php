@@ -10,13 +10,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AdminSecurityController extends AbstractController
 {
     /**
-     * @Route("/admin/login", name="admin_login")
+     * @Route("/admin/login", name="admin_login", methods={"GET"})
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        //if ($this->getUser()) {
-        //    return $this->redirectToRoute('target_path');
-        //}
+        if ($this->getUser()) {
+            return $this->redirectToRoute('admin_home');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

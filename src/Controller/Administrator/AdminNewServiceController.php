@@ -14,6 +14,10 @@ final class AdminNewServiceController extends AbstractController
 {
     /**
      * @Route("/admin/new/service", name="admin_new_service", methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
     public function new(Request $request, EntityManagerInterface $em): Response
     {

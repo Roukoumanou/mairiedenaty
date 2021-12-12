@@ -11,8 +11,11 @@ final class AdminServicesListController extends AbstractController
 {
     /**
      * @Route("/admin/services/list", name="admin_services_list", methods={"GET"})
+     *
+     * @param ServicesRepository $servicesRepository
+     * @return Response
      */
-    public function index(ServicesRepository $servicesRepository): Response
+    public function services(ServicesRepository $servicesRepository): Response
     {
         return $this->render('admin/services/index.html.twig', [
             'services' => $servicesRepository->findAll(),

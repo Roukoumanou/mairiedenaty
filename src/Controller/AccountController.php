@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -22,6 +23,10 @@ final class AccountController extends AbstractController
     /**
      * @Route("/edit", name="account_update", methods={"GET", "POST"})
      * @IsGranted("ROLE_USER")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
@@ -52,13 +57,17 @@ final class AccountController extends AbstractController
     /**
      * @Route("/password-edit", name="password_edit", methods={"GET", "POST"})
      * @IsGranted("ROLE_USER")
-     * 
-     * @param UserPasswordEncoderInterface $encoder
-     * @return Response
+     *
      * @param Request $request
+     * @param UserPasswordHasherInterface $encoder
+     * @param EntityManagerInterface $em
+     * @return Response
      */
-    public function passwordEdit(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em): Response
-    {
+    public function passwordEdit(
+        Request $request,
+        UserPasswordHasherInterface $encoder,
+        EntityManagerInterface $em
+    ): Response{
         $updatePassword = new PasswordEdit();
 
         $user = $this->getUser();
@@ -73,7 +82,7 @@ final class AccountController extends AbstractController
                 $form->get("oldPassword")->addError(new FormError("Vous n'avez pas saisi le bon mot de passe !"));
             } else {
 
-                $hash = $encoder->encodePassword($user, $updatePassword->getNewPassword());
+                $hash = $encoder->hashPassword($user, $updatePassword->getNewPassword());
                 $user->setPassword($hash)
                     ->setUpdatedAt(new \DateTime());
 

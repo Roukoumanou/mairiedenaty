@@ -4,21 +4,27 @@ namespace App\Controller;
 
 use App\Entity\Commentes;
 use App\Entity\CommentesLikes;
-use App\Repository\CommentesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentesLikesRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CommenteLikeController extends AbstractController
 {
     /**
      * @Route("/commente/{id}-like", name="commente_like")
+     *
+     * @param Commentes $commente
+     * @param EntityManagerInterface $em
+     * @param CommentesLikesRepository $commentesLikesRepository
+     * @return Response
      */
-    public function like(Commentes $commente, EntityManagerInterface $em, CommentesLikesRepository $commentesLikesRepository): Response
-    {
+    public function like(
+        Commentes $commente,
+        EntityManagerInterface $em,
+        CommentesLikesRepository $commentesLikesRepository
+    ): Response{
         $user = $this->getUser();
 
         if ($commente->getIsLikeByUser($user)) {

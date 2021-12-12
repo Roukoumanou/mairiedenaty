@@ -42,8 +42,10 @@ final class ProfilController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function adLike(ArticlesLikesRepository $articlesLikesRepository, Request $request): Response
-    {
+    public function adLike(
+        ArticlesLikesRepository $articlesLikesRepository,
+        Request $request
+    ): Response{
         $articlesLikes = $this->paginator->paginate(
             $articlesLikesRepository->findBy(['author' => $this->getUser()], ['createdAt' => 'DESC']),
             $request->query->getInt('page', 1), /*page number*/
@@ -62,8 +64,10 @@ final class ProfilController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function myCommente(CommentesRepository $commentesRepository, Request $request): Response
-    {
+    public function myCommente(
+        CommentesRepository $commentesRepository,
+        Request $request
+    ): Response{
         $commentes = $this->paginator->paginate(
             $commentesRepository->findBy(['author' => $this->getUser()], ['createdAt' => 'DESC']),
             $request->query->getInt('page', 1), /*page number*/
@@ -82,8 +86,10 @@ final class ProfilController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function myCommenteLike(CommentesLikesRepository $commentesLikesRepository, Request $request): Response
-    {
+    public function myCommenteLike(
+        CommentesLikesRepository $commentesLikesRepository,
+        Request $request
+    ): Response{
         $commentesLikes = $this->paginator->paginate(
             $commentesLikesRepository->findBy(['author' => $this->getUser()], ['createdAt' => 'DESC']),
             $request->query->getInt('page', 1), /*page number*/

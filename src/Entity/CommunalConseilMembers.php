@@ -17,6 +17,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CommunalConseilMembers
 {
+    public const MAIRE = 'maire';
+    public const ADJOINTS_AU_MAIRE = 'adjoints_au_maire';
+    public const C_A = 'c.as';
+    public const PDT_CAEF = 'caef';
+    public const PDTE_CASC = 'casc';
+    public const PDT_COM_PLAINTES = 'plaintes';
+    public const PDT_CADE = 'cade';
+    public const CONSEILLERS_COMMUNAL = 'c.cs';
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

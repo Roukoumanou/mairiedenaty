@@ -11,12 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/redact")
+ */
 final class ArticlesController extends AbstractController
 {
     /**
-     * @Route("/redact/new-article", name="redact_new_article", methods={"GET", "POST"})
+     * @Route("/new-article", name="redact_new_article", methods={"GET", "POST"})
      * @IsGranted("ROLE_REDACTOR")
      *
+     * @param Request $request
+     * @param EntityManagerInterface $em
      * @return Response
      */
     public function new(Request $request, EntityManagerInterface $em): Response
@@ -27,8 +32,7 @@ final class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $now = new \DateTime();
-            if ($article->getPublishedAt() < $now) {
+            if ($article->getPublishedAt() < new \DateTime()) {
                 $this->addFlash(
                     'danger',
                     'La Date de publication doit être dans le future!'
@@ -58,7 +62,7 @@ final class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/redact/article/{id}-{slug}", name="redact_edit_article", methods={"GET", "POST"})
+     * @Route("/article/{id}-{slug}", name="redact_edit_article", methods={"GET", "POST"})
      * @IsGranted("ROLE_REDACTOR")
      *
      * @param Articles $article
@@ -66,8 +70,11 @@ final class ArticlesController extends AbstractController
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function edit(Articles $article, Request $request, EntityManagerInterface $em): Response
-    {
+    public function edit(
+        Articles $article,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response{
         $form = $this->createForm(ArticleFormType::class, $article);
         $form->handleRequest($request);
 

@@ -11,6 +11,9 @@ final class AdminPrestationsListController extends AbstractController
 {
     /**
      * @Route("/admin/prestations/list", name="admin_prestations_list", methods={"GET"})
+     *
+     * @param PrestationsRepository $prestationsRepository
+     * @return Response
      */
     public function index(PrestationsRepository $prestationsRepository): Response
     {

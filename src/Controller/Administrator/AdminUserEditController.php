@@ -4,7 +4,6 @@ namespace App\Controller\Administrator;
 
 use App\Entity\User;
 use App\Form\AccountUpdateFormType;
-use App\Form\AdminRegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +14,11 @@ final class AdminUserEditController extends AbstractController
 {
     /**
      * @Route("/admin/user/edit/{id}", name="admin_user_edit", methods={"GET", "POST"})
+     *
+     * @param User $user
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
      */
     public function edit(User $user, EntityManagerInterface $em, Request $request): Response
     {
