@@ -26,7 +26,6 @@ final class AdminArticleEditController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($article->getContent());
             $article->setUpdatedAt(new \DateTime());
             $em->flush();
 
